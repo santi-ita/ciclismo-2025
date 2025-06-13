@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ciclismo 2025</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <nav>
+      <ul>
+        <li><a href="index.html">🚴 Ciclismo 2025</a></li>
+        <li><a href="salite.html">⛰️ Salite</a></li>
+        <li><a href="achievements.html">🏆 Achievements</a></li>
+        <li><a href="test.html">🧪 Test Futuri</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <h1 class="titolo-centrato">Ciclismo 2025</h1>
+
+    <div class="immagini-ciclismo">
+      <img src="img1.jpeg" alt="Palma de Maiorca">
+      <img src="img2.jpeg" alt="Cesenatico">
+      <img src="img3.jpeg" alt="Colle delle Finestre">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th><th>Percorso</th><th>Distanza</th><th>Dislivello</th><th>Durata</th>
+          <th>Velocità</th><th>Fc media/max</th><th>Alimentazione</th><th>Sensazioni</th>
+        </tr>
+      </thead>
+      <tbody id="ciclismo-body">
+        <!-- 30 righe -->
+        <!-- Copia <tr><td></td>...<td></td></tr> per ognuna -->
+
+		<tr>
+          <td>12/01/2025</td>
+          <td>Pratobottrile</td>
+          <td>70,47 km</td>
+		  <td>953 m</td>
+		  <td>3:41:21</td>
+          <td>19,1 km/h</td>
+          <td>154/183 bpm</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>26/04/2025</td>
+          <td>Borgata Adrit</td>
+          <td>92,15 km</td>
+		  <td>995 m</td>
+		  <td>4:21:00</td>
+          <td>21,2 km/h</td>
+          <td>156/182 bpm</td>
+          <td></td>
+          <td>I uscita per Nove Colli</td>
+        </tr>
+        <tr>
+          <td>04/05/2025</td>
+          <td>Forno + Viù</td>
+          <td>151,11 km</td>
+		  <td>1793 m</td>
+		  <td>6:47:09</td>
+          <td>22,3 km/h</td>
+          <td>149/176 bpm</td>
+          <td>Test alimentazione</td>
+          <td>Non forzo troppo ma tempi record rispetto ad un anno fa (preparavo la SNS)</td>
+        </tr>
+	    <tr>
+          <td>11/05/2025</td>
+          <td>Rando del Folaton</td>
+          <td>206 km</td>
+		  <td>2652 m</td>
+		  <td>10:24:55</td>
+          <td>19,8 km/h</td>
+          <td>153/178 bpm</td>
+          <td>80g CHO/h (gel+barrette)</td>
+          <td>Test alimentazione e resistenza</td>
+        </tr>
+		<tr>
+          <td>18/05/2025</td>
+          <td>GF Nove Colli</td>
+          <td>187,52 km</td>
+		  <td>3478 m</td>
+		  <td>10:09:04</td>
+          <td>18,5 km/h</td>
+          <td>160/181 bpm</td>
+          <td>80g CHO/h (gel+barrette)</td>
+          <td>Fc soglia (170 bpm) nella prima fase, dato tutto nel finale</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 1rem; margin-bottom: 1rem;">
+      <button onclick="salvaCSV()">💾 Salva dati</button>
+    </div>
+
+
+    <footer class="nav-footer">
+      <a href="salite.html">Successiva →</a>
+    </footer>
+  </main>
+
+  <script>
+  function salvaCSV() {
+    const rows = [];
+    const header = [
+      "Data",
+      "Percorso",
+      "Distanza",
+      "Velocità",
+      "Fc media/Fc max",
+      "Alimentazione",
+      "Sensazioni"
+    ];
+    rows.push(header);
+
+    const tbody = document.getElementById("ciclismo-body");
+    const righe = tbody.querySelectorAll("tr");
+
+    righe.forEach(tr => {
+      const dati = [];
+      tr.querySelectorAll("td").forEach(td => {
+        const valore = td.querySelector("input")?.value || td.textContent.trim();
+        dati.push(valore.replace(/;/g, ",")); // evita problemi nei CSV
+      });
+      rows.push(dati);
+    });
+
+    // Crea contenuto CSV
+    const csvContent = rows.map(r => r.join(";")).join("\n");
+
+    // Crea e scarica il file
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "ciclismo2025.csv";
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+  </script>
+
+
+</body>
+</html>
