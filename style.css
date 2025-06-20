@@ -6,7 +6,8 @@
 }
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #80deea);
+  /*background: linear-gradient(135deg, #e0f7fa, #80deea); */
+  background: withe;
   color: #222;
   line-height: 1.6;
   display: flex;
@@ -58,9 +59,10 @@ main.content {
   background: white;
   box-shadow: inset 0 0 20px #b2dfdb;
   border-radius: 12px;
-  max-width: 1000px;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  width: calc(100% - 220px);
+  min-height: 100vh;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
 }
 
 /* Titoli */
@@ -75,7 +77,7 @@ h1 {
 
 /* Tabelle */
 table {
-  margin: 2rem auto;
+  /*margin: 2rem auto;*/
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
@@ -101,7 +103,14 @@ footer.nav-footer {
   margin-top: 2rem;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
+
+footer.nav-footer:only-child,
+footer.nav-footer.single {
+  justify-content: flex-end;
+}
+
 footer.nav-footer a {
   font-weight: 600;
   color: #00796b;
@@ -140,4 +149,25 @@ footer.nav-footer a:hover {
   color: #e63946; /* opzionale: colore vivace */
 }
 
+@media (max-width: 768px) {
+  aside.sidebar {
+    display: none; /* Oppure adattala se vuoi tenerla */
+  }
 
+  main.content {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .immagini-ciclismo img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.bottone-destro {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1.5rem 0;
+}
